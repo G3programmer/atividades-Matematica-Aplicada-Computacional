@@ -1,21 +1,30 @@
 #include <iostream>
 using namespace std;
+
 int main() {
-    int caracol, lesma, soma, sub, mult, rest;
-    float die;
-    cout<<"Digite o primeiro número:\n"<<endl;
-    cin >> caracol;
-    cout<<"Agora o segundo número"<<endl;
-    cin >> lesma;
-     soma = caracol+lesma;
-    cout<<"Os números somados são: "<< soma <<"\n"<<endl;
-     sub = caracol-lesma;
-    cout<<"Os números subtraidos são: "<< sub <<"\n"<<endl;
-     mult = caracol*lesma;
-    cout<<"Os números multiplicados são: "<< mult <<"\n"<<endl;
-     die = (float)caracol / lesma;
-    cout<<"Os números divididos são: "<< die <<"\n"<<endl;
-     rest = caracol % lesma;
-    cout<<"Os números divididos são: "<< rest <<"\n"<<endl;
+    int num1, num2;
+
+    // Recebe dois números inteiros do usuário
+    cout << "Digite o primeiro número inteiro: ";
+    cin >> num1;
+
+    cout << "Digite o segundo número inteiro: ";
+    cin >> num2;
+
+    // Realiza e exibe as operações
+    cout << "\nResultados:\n";
+    cout << "Soma: " << num1 + num2 << endl;
+    cout << "Subtracao: " << num1 - num2 << endl;
+    cout << "Multiplicacao: " << num1 * num2 << endl;
+
+    // Verifica divisão por zero
+    if (num2 != 0) {
+        cout << "Divisao: " << static_cast<float>(num1) / num2 << endl;
+        cout << "Resto da divisao: " << num1 % num2 << endl;
+    } else {
+        cout << "Divisao: Indefinida (divisao por zero)" << endl;
+        cout << "Resto da divisao: Indefinido (divisao por zero)" << endl;
+    }
+
     return 0;
 }
