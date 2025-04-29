@@ -1,11 +1,3 @@
-/* 
-1 - Hamburguer ................ R$ 15,00
-2 - Pizza ..................... R$ 30,00
-3 - Salada .................... R$ 12,00
-4 - Suco Natural .............. R$ 8,00
-5 - Refrigerante .............. R$ 6,00
---------------------------------
-*/
 #include <iostream>
 using namespace std;
 
