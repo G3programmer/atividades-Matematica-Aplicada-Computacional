@@ -12,7 +12,7 @@ int main() {
     printf("Digite a sua idade:\n");
     scanf("%d", &idade);
 
-menu_principal:  // Loop principal
+menu_principal:  /*DEPOIS QUE O USUÁRIO "FALA QUERO MAIS", VOLTA AQUI*/
 
     printf("  ===== Seja Bem-vindo à Lanchonete do Gabriel Morozini =====\n");
     printf("  ===========================================================\n");
@@ -29,6 +29,8 @@ menu_principal:  // Loop principal
 
     scanf(" %c", &a);
 
+/*AQUI É TODA A PARTE DE ESCOLHAS (O FILHO CHORA E A MÃE TAMBÉM)*/
+
     switch (a) {
         case 'a':
         case 'b':
@@ -39,7 +41,9 @@ menu_principal:  // Loop principal
             preco_base = 0.0;
             qtd = 0;
             cancelar = 0;
-
+            
+/* DEIXEI JUNTO POR CPNTA DAS OPÇÕES ADICIONAIS, EU QUIS RECICLAR ;) */
+            
             if (a == 'a') {
                 printf("Você escolheu: Hambúrguer - R$15,00\n");
                 preco_base = 15.00;
@@ -50,7 +54,7 @@ menu_principal:  // Loop principal
                 printf("Você escolheu: X-Bacon - R$18,50\n");
                 preco_base = 18.50;
             }
-
+/*EU CHEGUEI A CONCLUSÃO DE QUE 10 É O SUFICIENTE, NUNCA VI PEDIREM 11 LANCHES*/
             do {
                 printf("Quantos você deseja? (Máx. 10): ");
                 scanf("%d", &qtd);
@@ -80,7 +84,9 @@ menu_principal:  // Loop principal
                     adicionais += qtd * 2.00;
                 }
             }
-
+            
+            /*OPÇÕES QUE ACRESCENTAM NO VALOR :) */
+            
             if (a == 'a' || a == 'c') {
                 printf("Deseja adicionar bacon por R$2,50? (S/N): ");
                 scanf(" %c", &bacon);
@@ -92,22 +98,49 @@ menu_principal:  // Loop principal
             }
 
             total += adicionais;
+            
+            /*MOSTRA O RELATÓRIO DO CABOCO*/
+            
+            printf("\n#############################################################\n");
+printf("#                   RESUMO DO PEDIDO                        #\n");
+printf("#-----------------------------------------------------------#\n");
+printf("# Descrição do item                                         #\n");
+printf("#-----------------------------------------------------------#\n");
+printf("# Item                       | Qtd |     Total              #\n");
+printf("#----------------------------|-----|------------------------#\n");
 
-            printf("\nResumo do seu pedido:\n");
-            printf("- %d unidade(s): R$%.2f\n", qtd, qtd * preco_base);
-            if (a == 'a') {
-                if (maionese == 'S' || maionese == 's') printf("- Com maionese\n");
-                if (pepino == 'S' || pepino == 's') printf("- Com pepino\n");
-            } else {
-                if (molho == 'S' || molho == 's') printf("- Com molho\n");
-                if (ketchup == 'S' || ketchup == 's') printf("- Com ketchup\n");
-                if (mostarda == 'S' || mostarda == 's') printf("- Com mostarda\n");
-                if (molho_verde == 'S' || molho_verde == 's') printf("- Molho verde: R$%.2f\n", qtd * 2.00);
-            }
-            if (bacon == 'S' || bacon == 's') printf("- Bacon: R$%.2f\n", qtd * 2.50);
-            if (carne == 'S' || carne == 's') printf("- Carne extra: R$%.2f\n", qtd * 5.00);
+char item_nome[30];
+if (a == 'a') strcpy(item_nome, "Hambúrguer");
+else if (a == 'b') strcpy(item_nome, "X-Salada");
+else strcpy(item_nome, "X-Bacon");
 
-            printf("Total parcial acumulado: R$%.2f\n", total);
+printf("# %-26s | %3d | R$ %7.2f            #\n", item_nome, qtd, qtd * preco_base);
+
+if (a == 'a') {
+    if (maionese == 'S' || maionese == 's')
+        printf("# %-26s |     | R$ %7.2f            #\n", "Com maionese", 0.00);
+    if (pepino == 'S' || pepino == 's')
+        printf("# %-26s |     | R$ %7.2f            #\n", "Com pepino", 0.00);
+} else {
+    if (molho == 'S' || molho == 's')
+        printf("# %-26s |     | R$ %7.2f            #\n", "Com molho", 0.00);
+    if (ketchup == 'S' || ketchup == 's')
+        printf("# %-26s |     | R$ %7.2f            #\n", "Com ketchup", 0.00);
+    if (mostarda == 'S' || mostarda == 's')
+        printf("# %-26s |     | R$ %7.2f            #\n", "Com mostarda", 0.00);
+    if (molho_verde == 'S' || molho_verde == 's')
+        printf("# %-26s |     | R$ %7.2f            #\n", "Molho verde", qtd * 2.00);
+}
+
+if (bacon == 'S' || bacon == 's')
+    printf("# %-26s |     | R$ %7.2f            #\n", "Bacon extra", qtd * 2.50);
+if (carne == 'S' || carne == 's')
+    printf("# %-26s |     | R$ %7.2f            #\n", "Carne extra", qtd * 5.00);
+
+printf("#-----------------------------------------------------------#\n");
+printf("# Total parcial acumulado:        R$ %7.2f                 #\n", total);
+printf("##############################################################\n");
+
 
             printf("\nDeseja editar ou cancelar o pedido? (E para editar, C para cancelar, N para continuar): ");
             scanf(" %c", &editar);
