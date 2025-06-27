@@ -25,11 +25,27 @@ int main() {
     // STRINGS AUXILIARES
     char item_nome[30];
     char sabor[30];
-
+    
+while (1) {
     printf("Digite o seu nome:\n");
     scanf(" %[^\n]", nome);
+
     printf("Digite a sua idade:\n");
     scanf("%d", &idade);
+
+    if (idade > 120) {
+        printf("Idade inválida! É impossível ter mais de 120 anos.\n\n");
+        continue; // SEI QUE VOCÊ NÃO TEM E NEM MAIS QUE 120 ANOS 
+    }
+
+    if (idade < 13) {
+        printf("Desculpe, você precisa ter pelo menos 13 anos para comprar.\n\n");
+        continue; // MUITO JOVEM, PEÇA A UM RESPONÁVEL MAIS VELHO
+    }
+
+    break; // OK
+}
+
 
     while (1) {
     menu_principal: /*DEPOIS QUE O USUÁRIO "FALA QUERO MAIS", VOLTA AQUI*/
