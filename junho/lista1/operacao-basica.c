@@ -29,7 +29,7 @@ int main() {
                 d = a / b;
                 printf("A divisão de %d por %d é igual a %d\n", a, b, d);
             } else {
-                printf("Erro: divisão por zero não é permitida.\n");
+                printf("Boa tentativa, mas divisão por 0 não existe.\n");
             }
             break;
         default:
