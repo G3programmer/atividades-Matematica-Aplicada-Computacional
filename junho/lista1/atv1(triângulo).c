@@ -21,10 +21,9 @@ int main() {
             else {
                 printf("Seu triangulo é um triângulo Escaleno! \n");
             }
-            break; // sai do laço se tudo estiver ok
+            break;
         } else {
             printf("Valores inválidos! Tente novamente!\n\n");
-            // o laço continua automaticamente, sem precisar de "continue"
         }
     }
 
