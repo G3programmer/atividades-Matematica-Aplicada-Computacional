@@ -1,137 +1,133 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 /*
-Crian¸ca at´e 6 anos: Gr´atis
-• Idoso (acima de 65): R$ 2,00
-• Estudante com carteirinha: R$ 2,50
-• Adulto: R$ 4,00
-Pe¸ca ao usu´ario a idade e se ´e estudante (S ou N).
-Use if, else if e else
+Regras:
+- Criança até 6 anos: Grátis, mas só pode com acompanhante
+- Idoso acima de 65: R$2,00
+- Estudante com carteirinha: R$2,50
+- Adulto: R$4,00
 */
 
+int main() {
+    string nome;
+    int idade, qtd;
+    float total = 0.0;
+    char estudante, resposta;
 
-/*
-qtd de criança é= "d"
-qtd de idoso é= "g"
-qtd de estudantes é= "f"
-*/
+    cout << "=====================================" << endl;
+    cout << "# Bem Vindo ao Sistema de Tarifário #" << endl;
+    cout << "#        Do Gabriel Morozini        #" << endl;
+    cout << "=====================================" << endl;
 
-int main()
-{
-    int b,c,d,e,f;
-    float a;
-    char x,y,crianca,idoso,estudante;
-    
-    cout<<"====================================="<<endl;
-    cout<<"# Bem Vindo ao Sistema de Tarifário #"<<endl;
-    cout<<"#        Do Gabriel Morozini        #"<<endl;
-    cout<<"====================================="<<endl;
-    cout<<"|    Digite Seu nome e sua idade    |"<<endl;
-    cout<<"====================================="<<endl;
-    cout<<"Seu Nome: "<<endl;
-    cin>>x;
-    cout<<"Sua idade: "<<endl;
-    cin>>b;
-    cout<<"Você é estudante? (S/N)"<<endl;
-    cin>>estudante;
-    
-    
-    /*Parte de adulto*/
-    if(b<=18) (estudante=='N'||estudante=='n') {
-        cout<<"Tem mais alguém com você? (S/N)"<<endl;
-        cin>>y;
-        if(y=='S' || y=='s'){
-            cout<<"Quantas pessoas?"<<endl;
-            cin>>c;
-            
-            /*Verificar se há pessoas normais*/
-            
-            /*Verifica se há estudante*/
-            
-            /*Verificar as crianças*/
-            cout<<"Há criança(s)? (S/N)"<<endl;
-            cin>>crianca;
-            
-            /*FAZER UM IF, else if e else AQUI Ó*/
-            if(crianca=='S' || crianca=='s') {
-                cout<<"Quantas crianças? "<<endl;
-                cin>>d;
-            }
-            else {
-               /*Código quebra aqui*/                
-            }
-            
-            cout<<"Há Idoso(s)? (S/N)"<<endl;
-            cin>>idoso;
-            
-            /*FAZER UM IF, else if e else AQUI Ó*/            
-            if(crianca=='S'|| crianca=='s') {
-                cout<<"Quantos idosos? "<<endl;
-                cin>>e;
-                g=e*2.00;
-            }
-            
-            
-               /*Código quebra aqui*/ 
-            }
+    // Dados do usuário principal
+    cout << "Digite seu nome: ";
+    cin >> nome;
+
+    cout << "Digite sua idade: ";
+    cin >> idade;
+
+    // Caso: criança sozinha (proibido)
+    if (idade <= 6) {
+        cout << "\nCrianças até 6 anos não podem entrar sozinhas." << endl;
+        cout << "Há um acompanhante maior de idade com você? (S/N): ";
+        cin >> resposta;
+
+        if (resposta == 'N' || resposta == 'n') {
+            cout << "\n⚠️ A entrada não é permitida sem acompanhante maior de idade." << endl;
+            return 0;
         }
-        else if (y=='N' || y=='n') {
-            /*Termina o valor aqui*/
+        else if (resposta == 'S' || resposta == 's') {
+            cout << "Criança acompanhada. Entrada gratuita para a criança." << endl;
         }
-        
         else {
-            cout<<"Opção inválida, tente novamente!"<<endl;
+            cout << "Opção inválida. Encerrando." << endl;
+            return 0;
         }
-        
     }
-    
-    /*Parte de idoso*/
-    if(b>=60) {
-    cout<<"Tem mais alguém com você? (S/N)"<<endl;
-        cin>>y;
-        if(y=='S' || y=='s'){
-            cout<<"Quantas pessoas?"<<endl;
-            cin>>c;
-            
-            cout<<"Há criança(s)? (S/N)"<<endl;
-            cin>>crianca;
-            
-            /*FAZER UM IF, else if e else AQUI Ó*/
-            
-            cout<<"Há Idoso(s)? (S/N)"<<endl;
-            cin>>idoso;
-            
-            /*FAZER UM IF, else if e else AQUI Ó*/            
-            
+    else if (idade >= 65) {
+        total += 2.0;
+        cout << "Idoso: R$2.00" << endl;
+    }
+    else {
+        // Jovens e adultos entre 7 e 64 anos
+        cout << "Você é estudante com carteirinha? (S/N): ";
+        cin >> estudante;
+
+        if (estudante == 'S' || estudante == 's') {
+            total += 2.5;
+            cout << "Estudante com carteirinha: R$2.50" << endl;
         }
-        else if (y=='N' || y=='n') {
-            /*Termina o valor aqui*/
+        else if (estudante == 'N' || estudante == 'n') {
+            total += 4.0;
+            if (idade < 18) {
+                cout << "Jovem sem carteirinha: R$4.00" << endl;
+            } else {
+                cout << "Adulto: R$4.00" << endl;
+            }
         }
-        
         else {
-            cout<<"Opção inválida, tente novamente!"<<endl;
+            cout << "Opção inválida. Considerando como sem carteirinha." << endl;
+            total += 4.0;
         }
-        
     }
-    
-    /*Parte para saber se tem carteirinha para estudante*/
-    if()
-    
-    
-    
-    
-/* aqui vai ser derntro de um porque criança não anda sozinha poxa
-    if(b<=6) {
+
+    // Acompanhantes
+    cout << "\nTem mais alguém com você? (S/N): ";
+    cin >> resposta;
+
+    if (resposta == 'S' || resposta == 's') {
+        // Adultos
+        cout << "Há adultos (entre 19 e 64 anos)? (S/N): ";
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Quantos adultos? ";
+            cin >> qtd;
+            if (qtd > 0) {
+                total += qtd * 4.0;
+            }
+        }
+
+        // Estudantes
+        cout << "Há estudantes com carteirinha? (S/N): ";
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Quantos estudantes? ";
+            cin >> qtd;
+            if (qtd > 0) {
+                total += qtd * 2.5;
+            }
+        }
+
+        // Idosos
+        cout << "Há idosos (65+)? (S/N): ";
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Quantos idosos? ";
+            cin >> qtd;
+            if (qtd > 0) {
+                total += qtd * 2.0;
+            }
+        }
+
+        // Crianças
+        cout << "Há crianças (até 6 anos)? (S/N): ";
+        cin >> resposta;
+        if (resposta == 'S' || resposta == 's') {
+            cout << "Quantas crianças? ";
+            cin >> qtd;
+            if (qtd > 0) {
+                cout << qtd << " criança(s) têm entrada gratuita." << endl;
+            }
+        }
     }
-*/
 
-
-/*  
-total=g+    
-d= é crianças de 6 anos ent tanto faz
-g= é idoso
-*/
+    // Resultado final
+    cout << "\n=====================================" << endl;
+    cout << "Total a pagar: R$" << total << endl;
+    cout << "Obrigado pela visita, " << nome << "!" << endl;
+    cout << "=====================================" << endl;
 
     return 0;
 }
