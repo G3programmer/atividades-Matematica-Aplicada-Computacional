@@ -1,11 +1,14 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <thread>   // necessário para sleep
-#include <chrono>   // necessário para sleep
+#include <thread>   // PROGRAMA VAI NINAR EM ALGUNS PERÍODOS
+#include <chrono>   // PROGRAMA CONTA O TEMPO QUE EU DEFINIR
+//ESSES DOIS INCLUDES QUE DEFINI SÃO PARA LIMPEZA DE TELA, USO PARA ELE PAUSAR E CONTAR ATÉ 2 SEGUNDOS
+//SOMENTE QUANDO CAI EM this_thread::sleep_for(chrono::seconds(1));
+//  this_thread::sleep_for(chrono::seconds(5)); PARA PODER VER OS status MAIS TRANQUILO SEM PRESSÃO
 using namespace std;
 
-// Função para limpar a tela
+// LIMPADOR DE COISAS 
 void limparTela() {
 #ifdef _WIN32
     system("cls");
@@ -34,7 +37,7 @@ int main() {
     int opcao;
     string entrada;
 
-    // --- Verificação de usuário com opções numéricas ---
+    // SER ADM OU NÃO SER?
     int tipoUsuario = 0;
     while (true) {
         limparTela();
@@ -46,12 +49,13 @@ int main() {
         stringstream ss(entrada);
         if ((ss >> tipoUsuario) && ss.eof() && (tipoUsuario == 1 || tipoUsuario == 2)) break;
         cout << "Opção inválida. Digite 1 para Admin ou 2 para Usuário.\n";
-        this_thread::sleep_for(chrono::seconds(2));
+        this_thread::sleep_for(chrono::seconds(1));
     }
     bool isAdmin = (tipoUsuario == 1);
 
     do {
-        limparTela();  // limpa a tela a cada início de ciclo do menu
+        limparTela();  //TODA VEZ QUE VOLTA AO MENU, LIMPA A SUJEIRA ANTERIOR
+
 
         cout << "\n--- MENU ---\n";
         if (isAdmin) {
@@ -68,7 +72,10 @@ int main() {
                 cout << "Opção inválida. Digite um número entre 1 e 5: ";
             }
         } else {
-            // Usuário normal não pode cadastrar sala
+            
+            cout<<""<<endl;
+            
+            // USUÁRIO SÓ ESCOLHE COISAS, NÃO CRIA SALAS
             cout << "1. Ver status\n";
             cout << "2. Fazer reserva\n";
             cout << "3. Cancelar reserva\n";
@@ -80,19 +87,13 @@ int main() {
                 if ((ss >> opcao) && ss.eof() && opcao >= 1 && opcao <= 4) break;
                 cout << "Opção inválida. Digite um número entre 1 e 4: ";
             }
-
-            // Mapear as opções do usuário para as do admin para reaproveitar código:
-            // usuário escolheu 1 (Ver status) => opcao = 2 (admin)
-            // usuário escolheu 2 (Fazer reserva) => opcao = 3 (admin)
-            // usuário escolheu 3 (Cancelar reserva) => opcao = 4 (admin)
-            // usuário escolheu 4 (Sair) => opcao = 5 (admin)
             opcao += 1;
         }
 
-        if (opcao == 1) {  // Cadastrar sala (somente admin)
+        if (opcao == 1) {  // SÓ ADM TEM PODER DE CRIAR SALA 
             if (!isAdmin) {
                 cout << "Opção inválida para usuário comum.\n";
-                this_thread::sleep_for(chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(1));
                 continue;
             }
 
@@ -128,32 +129,40 @@ int main() {
 
                 salas[totalSalas++] = s;
                 cout << "Sala cadastrada!\n";
-                this_thread::sleep_for(chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(1));
             } else {
                 cout << "Limite de salas atingido.\n";
-                this_thread::sleep_for(chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(1));
             }
         }
 
-        else if (opcao == 2) {  // Ver status
-            for (int i = 0; i < totalSalas; i++) {
-                cout << "\nSala ID: " << salas[i].id
-                     << " | Capacidade: " << salas[i].capacidade
-                     << " | Disponível: " << (salas[i].disponivel ? "Sim" : "Nao") << "\n";
-
-                cout << "Reservas:\n";
-                for (int d = 0; d < 7; d++) {
-                    for (int h = 0; h < 12; h++) {
-                        if (salas[i].reservas[d][h].feita) {
-                            cout << "  Dia " << (d + 1) << ", Hora " << (h + 1) << ": Reservado\n";
+           else if (opcao == 2) {  // VEJA A SITUAÇÃO DAS SALAS
+            if (totalSalas == 0) {
+                cout << "Nenhuma sala cadastrada ainda.\n";
+                this_thread::sleep_for(chrono::seconds(5));
+            } else {
+                for (int i = 0; i < totalSalas; i++) {
+                    cout << "\nSala ID: " << salas[i].id
+                         << " | Capacidade: " << salas[i].capacidade
+                         << " | Disponível: " << (salas[i].disponivel ? "Sim" : "Nao") << "\n";
+        
+                    cout << "Reservas:\n";
+                    for (int d = 0; d < 7; d++) {
+                        for (int h = 0; h < 12; h++) {
+                            if (salas[i].reservas[d][h].feita) {
+                                cout << "  Dia " << (d + 1) << ", Hora " << (h + 1) << ": Reservado\n";
+                            }
                         }
                     }
                 }
+                this_thread::sleep_for(chrono::seconds(10));
             }
-            this_thread::sleep_for(chrono::seconds(3));
         }
 
-        else if (opcao == 3) {  // Fazer reserva
+
+
+        else if (opcao == 3) {  // RESERVAR É AQUI
+        //O USUÁRIO NÃO VAI PREGAR PEÇAS NO MEU CÓDIGO >:(
             int id, dia, hora, pessoas;
 
             cout << "ID da sala: ";
@@ -206,10 +215,10 @@ int main() {
                 }
             }
             if (!encontrada) cout << "Sala não encontrada.\n";
-            this_thread::sleep_for(chrono::seconds(2));
+            this_thread::sleep_for(chrono::seconds(1));
         }
 
-        else if (opcao == 4) {  // Cancelar reserva
+        else if (opcao == 4) {  // CANCELAR
             int id, dia, hora;
 
             cout << "ID da sala: ";
@@ -250,7 +259,7 @@ int main() {
                 }
             }
             if (!encontrada) cout << "Sala não encontrada.\n";
-            this_thread::sleep_for(chrono::seconds(2));
+            this_thread::sleep_for(chrono::seconds(1));
         }
 
     } while (opcao != 5);
