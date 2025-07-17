@@ -1,5 +1,5 @@
 #include <iostream>
-#include <sstream>
+#include <sstream>  //PARA STRINGS (COMO SE FOSSE FLUXO)
 #include <string>
 #include <thread>   // PROGRAMA VAI NINAR EM ALGUNS PERÍODOS
 #include <chrono>   // PROGRAMA CONTA O TEMPO QUE EU DEFINIR
@@ -56,6 +56,19 @@ int main() {
     do {
         limparTela();  //TODA VEZ QUE VOLTA AO MENU, LIMPA A SUJEIRA ANTERIOR
 
+cout << R"(
+                                                                                         
+88888888ba                                                              88               
+88      "8b                                                             88               
+88      ,8P                                                             88               
+88aaaaaa8P'  ,adPPYba,  ,adPPYba,   ,adPPYba,  8b,dPPYba,  8b       d8  88  8b       d8  
+88""""88'   a8P_____88  I8[    ""  a8P_____88  88P'   "Y8  `8b     d8'  88  `8b     d8'  
+88    `8b   8PP"""""""   `"Y8ba,   8PP"""""""  88           `8b   d8'   88   `8b   d8'   
+88     `8b  "8b,   ,aa  aa    ]8I  "8b,   ,aa  88            `8b,d8'    88    `8b,d8'    
+88      `8b  `"Ybbd8"'  `"YbbdP"'   `"Ybbd8"'  88              "8"      88      Y88'     
+                                                                                d8'      
+                                                                               d8'     
+)";
 
         cout << "\n--- MENU ---\n";
         if (isAdmin) {
@@ -72,10 +85,23 @@ int main() {
                 cout << "Opção inválida. Digite um número entre 1 e 5: ";
             }
         } else {
-            
-            cout<<""<<endl;
-            
+
             // USUÁRIO SÓ ESCOLHE COISAS, NÃO CRIA SALAS
+            // O R SERVE PARA ESCREVER SEM ENCREMENTAR NADA POR OBRIGAÇÃO.
+cout << R"(
+                                                                                         
+88888888ba                                                              88               
+88      "8b                                                             88               
+88      ,8P                                                             88               
+88aaaaaa8P'  ,adPPYba,  ,adPPYba,   ,adPPYba,  8b,dPPYba,  8b       d8  88  8b       d8  
+88""""88'   a8P_____88  I8[    ""  a8P_____88  88P'   "Y8  `8b     d8'  88  `8b     d8'  
+88    `8b   8PP"""""""   `"Y8ba,   8PP"""""""  88           `8b   d8'   88   `8b   d8'   
+88     `8b  "8b,   ,aa  aa    ]8I  "8b,   ,aa  88            `8b,d8'    88    `8b,d8'    
+88      `8b  `"Ybbd8"'  `"YbbdP"'   `"Ybbd8"'  88              "8"      88      Y88'     
+                                                                                d8'      
+                                                                               d8'     
+)";
+
             cout << "1. Ver status\n";
             cout << "2. Fazer reserva\n";
             cout << "3. Cancelar reserva\n";
@@ -158,9 +184,6 @@ int main() {
                 this_thread::sleep_for(chrono::seconds(10));
             }
         }
-
-
-
         else if (opcao == 3) {  // RESERVAR É AQUI
         //O USUÁRIO NÃO VAI PREGAR PEÇAS NO MEU CÓDIGO >:(
             int id, dia, hora, pessoas;
